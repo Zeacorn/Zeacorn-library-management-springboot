@@ -3,6 +3,7 @@ package com.zea.springboot.service;
 import com.github.pagehelper.PageInfo;
 import com.zea.springboot.controller.request.BaseRequest;
 import com.zea.springboot.controller.request.LoginRequest;
+import com.zea.springboot.controller.request.PassWordRequest;
 import com.zea.springboot.controller.request.UserPageRequest;
 import com.zea.springboot.dto.LoginDTO;
 import com.zea.springboot.entity.Admin;
@@ -24,4 +25,7 @@ public interface IAdminService {
     void deleteById(Integer id);
 
     LoginDTO login(LoginRequest loginRequest);
+
+    void changePassWord(PassWordRequest passWordRequest);
+
 }

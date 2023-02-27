@@ -13,7 +13,8 @@ public class Admin {
     private String phone;
     private String email;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date createtime;
+    private Date createTime;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date updatetime;
+    private Date updateTime;
+    private Boolean status;
 }

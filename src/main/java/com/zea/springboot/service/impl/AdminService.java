@@ -1,21 +1,16 @@
 package com.zea.springboot.service.impl;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zea.springboot.controller.exception.ServiceException;
 import com.zea.springboot.controller.request.BaseRequest;
 import com.zea.springboot.controller.request.LoginRequest;
-import com.zea.springboot.controller.request.UserPageRequest;
+import com.zea.springboot.controller.request.PassWordRequest;
 import com.zea.springboot.dto.LoginDTO;
 import com.zea.springboot.entity.Admin;
-import com.zea.springboot.entity.Admin;
 import com.zea.springboot.mapper.AdminMapper;
-import com.zea.springboot.mapper.UserMapper;
 import com.zea.springboot.service.IAdminService;
-import com.zea.springboot.service.IUserService;
 import com.zea.springboot.utils.TokenUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +49,7 @@ public class AdminService implements IAdminService{
 
     @Override
     public void update(Admin admin) {
-        admin.setUpdatetime(new Date());
+        admin.setUpdateTime(new Date());
         adminMapper.updateById(admin);
     }
 
@@ -70,6 +65,11 @@ public class AdminService implements IAdminService{
         if(admin == null){
             throw new ServiceException("用户名或密码错误");
         }
+
+        if(!admin.getStatus()){
+            throw new ServiceException("当前用户已被禁用，请联系管理员处理");
+        }
+
         LoginDTO loginDTO = new LoginDTO();
         BeanUtils.copyProperties(admin,loginDTO);
 
@@ -77,6 +77,15 @@ public class AdminService implements IAdminService{
         String token = TokenUtils.genToken(String.valueOf(admin.getId()),admin.getPassword());
         loginDTO.setToken(token);
         return loginDTO;
+    }
+
+    @Override
+    public void changePassWord(PassWordRequest passWordRequest) {
+        passWordRequest.setNewPW(SecureUtil.md5(passWordRequest.getNewPW()));
+        boolean flag = adminMapper.changePassWord(passWordRequest);
+        if(flag == false){
+            throw new ServiceException("修改失败");
+        }
     }
 
 

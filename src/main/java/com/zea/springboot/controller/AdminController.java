@@ -3,6 +3,7 @@ package com.zea.springboot.controller;
 import com.zea.springboot.common.Result;
 import com.zea.springboot.controller.request.AdminPageRequest;
 import com.zea.springboot.controller.request.LoginRequest;
+import com.zea.springboot.controller.request.PassWordRequest;
 import com.zea.springboot.entity.Admin;
 import com.zea.springboot.service.IAdminService;
 import com.zea.springboot.service.IUserService;
@@ -20,6 +21,12 @@ public class AdminController {
     @PostMapping("/login")
     public  Result login(@RequestBody LoginRequest loginRequest){
         return Result.success(iAdminService.login(loginRequest));
+    }
+
+    @PutMapping("/password")
+    public  Result password(@RequestBody PassWordRequest passWordRequest){
+        iAdminService.changePassWord(passWordRequest);
+        return Result.success();
     }
 
     @PostMapping("/save")

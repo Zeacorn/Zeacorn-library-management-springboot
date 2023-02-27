@@ -8,7 +8,6 @@ import com.zea.springboot.controller.request.UserPageRequest;
 import com.zea.springboot.entity.User;
 import com.zea.springboot.mapper.UserMapper;
 import com.zea.springboot.service.IUserService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +46,7 @@ public class UserService implements IUserService{
 
     @Override
     public void update(User user) {
-        user.setUpdatetime(new Date());
+        user.setUpdateTime(new Date());
         userMapper.updateById(user);
     }
 

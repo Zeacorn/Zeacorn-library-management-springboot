@@ -2,6 +2,7 @@ package com.zea.springboot.mapper;
 
 import com.zea.springboot.controller.request.BaseRequest;
 import com.zea.springboot.controller.request.LoginRequest;
+import com.zea.springboot.controller.request.PassWordRequest;
 import com.zea.springboot.entity.Admin;
 import com.zea.springboot.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -24,4 +25,7 @@ public interface AdminMapper {
     void deleteById(Integer id);
 
     Admin getByUsernameAndPassword(LoginRequest loginRequest);
+
+    boolean changePassWord(PassWordRequest passWordRequest);
+
 }
