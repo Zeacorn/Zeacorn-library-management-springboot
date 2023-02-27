@@ -16,6 +16,7 @@ import com.zea.springboot.mapper.AdminMapper;
 import com.zea.springboot.mapper.UserMapper;
 import com.zea.springboot.service.IAdminService;
 import com.zea.springboot.service.IUserService;
+import com.zea.springboot.utils.TokenUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,10 @@ public class AdminService implements IAdminService{
         }
         LoginDTO loginDTO = new LoginDTO();
         BeanUtils.copyProperties(admin,loginDTO);
+
+        //生成token
+        String token = TokenUtils.genToken(String.valueOf(admin.getId()),admin.getPassword());
+        loginDTO.setToken(token);
         return loginDTO;
     }
 
