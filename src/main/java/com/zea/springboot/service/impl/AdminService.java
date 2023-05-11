@@ -12,13 +12,16 @@ import com.zea.springboot.entity.Admin;
 import com.zea.springboot.mapper.AdminMapper;
 import com.zea.springboot.service.IAdminService;
 import com.zea.springboot.utils.TokenUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Service
 public class AdminService implements IAdminService{
     @Autowired
@@ -39,7 +42,12 @@ public class AdminService implements IAdminService{
     @Override
     public void save(Admin admin) {
         admin.setPassword(SecureUtil.md5(admin.getPassword())); //设置md5加密
-        adminMapper.save(admin);
+        try{
+            adminMapper.save(admin);
+        } catch (DuplicateKeyException e){
+            log.error("数据插入失败, username:{}", admin.getUsername(), e);
+            throw new ServiceException("用户名重复");
+        }
     }
 
     @Override

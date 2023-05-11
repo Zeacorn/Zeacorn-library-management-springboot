@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zea.springboot.mapper.BookMapper">
+
+    <select id="listByCondition" resultType="com.zea.springboot.entity.Book">
+        select * from book
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%', #{ name }, '%')
+            </if>
+            <if test="bookNo != null and bookNo != ''">
+                and bookNo = #{ bookNo }
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <insert id="save">
+        insert into book(name, description, publishDate, author, publisher, category, bookNo, cover)
+        values(#{name}, #{description}, #{publishDate}, #{author}, #{publisher}, #{category}, #{bookNo}, #{cover})
+    </insert>
+    <update id="update">
+        update book set name = #{name}, description = #{description}, publishDate = #{publishDate}, author = #{author}, publisher = #{publisher},
+                        category = #{category}, bookNo = #{bookNo}, cover = #{cover}, updateTime = #{updateTime} where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from book where id = #{id}
+    </delete>
+
+
+    <select id="list" resultType="com.zea.springboot.entity.Book">
+        select * from book order by id desc
+    </select>
+
+    <select id="getById" resultType="com.zea.springboot.entity.Book">
+        select * from book where id = #{id}
+    </select>
+</mapper>
