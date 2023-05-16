@@ -15,6 +15,8 @@ public interface IUserService {
 
     User getById(Integer id);
 
+    User getByUserId(String userId);
+
     void update(User user);
 
     void deleteById(Integer id);

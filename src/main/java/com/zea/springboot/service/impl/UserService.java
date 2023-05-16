@@ -45,6 +45,11 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public User getByUserId(String userId) {
+        return userMapper.getByUserId(userId);
+    }
+
+    @Override
     public void update(User user) {
         user.setUpdateTime(new Date());
         userMapper.updateById(user);

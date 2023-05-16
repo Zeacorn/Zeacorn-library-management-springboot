@@ -49,6 +49,11 @@ public class BookService implements IBookService {
     }
 
     @Override
+    public Book getByBookNo(String bookNo) {
+        return bookMapper.getByBookNo(bookNo);
+    }
+
+    @Override
     public void update(Book book) {
         book.setUpdateTime(new Date());
         bookMapper.update(book);

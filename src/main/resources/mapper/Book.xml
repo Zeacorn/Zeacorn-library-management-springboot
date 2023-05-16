@@ -18,12 +18,12 @@
     </select>
 
     <insert id="save">
-        insert into book(name, description, publishDate, author, publisher, category, bookNo, cover)
-        values(#{name}, #{description}, #{publishDate}, #{author}, #{publisher}, #{category}, #{bookNo}, #{cover})
+        insert into book(name, description, publishDate, author, publisher, category, bookNo, cover, nums)
+        values(#{name}, #{description}, #{publishDate}, #{author}, #{publisher}, #{category}, #{bookNo}, #{cover}, #{nums})
     </insert>
     <update id="update">
         update book set name = #{name}, description = #{description}, publishDate = #{publishDate}, author = #{author}, publisher = #{publisher},
-                        category = #{category}, bookNo = #{bookNo}, cover = #{cover}, updateTime = #{updateTime} where id = #{id}
+                        category = #{category}, bookNo = #{bookNo}, cover = #{cover}, updateTime = #{updateTime}, nums = #{nums} where id = #{id}
     </update>
     <delete id="deleteById">
         delete from book where id = #{id}
@@ -36,5 +36,8 @@
 
     <select id="getById" resultType="com.zea.springboot.entity.Book">
         select * from book where id = #{id}
+    </select>
+    <select id="getByBookNo" resultType="com.zea.springboot.entity.Book">
+        select * from book where bookNo = #{bookNo}
     </select>
 </mapper>

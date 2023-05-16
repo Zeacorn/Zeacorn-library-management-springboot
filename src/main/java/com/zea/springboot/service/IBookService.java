@@ -15,6 +15,8 @@ public interface IBookService {
 
     Book getById(Integer id);
 
+    Book getByBookNo(String bookNo);
+
     void update(Book book);
 
     void deleteById(Integer id);

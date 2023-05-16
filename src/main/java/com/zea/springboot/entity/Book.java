@@ -23,4 +23,5 @@ public class Book {
     private Date updateTime;
     private String cover;
     private List<String> categories;
+    private Integer nums;
 }
