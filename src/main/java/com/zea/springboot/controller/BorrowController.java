@@ -1,12 +1,15 @@
 package com.zea.springboot.controller;
 
+import cn.hutool.core.io.FileUtil;
 import com.zea.springboot.common.Result;
 import com.zea.springboot.controller.request.BorrowPageRequest;
 import com.zea.springboot.entity.Borrow;
 import com.zea.springboot.service.IBorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,9 +24,16 @@ public class BorrowController {
         return Result.success(borrow);
     }
 
+
     @PutMapping("/update")
     public Result update(@RequestBody Borrow borrow){
         iBorrowService.update(borrow);
+        return Result.success();
+    }
+
+    @PutMapping("/updateStatus")
+    public Result updateStatus(@RequestBody Borrow borrow){
+        iBorrowService.updateStatus(borrow);
         return Result.success();
     }
 
@@ -48,5 +58,10 @@ public class BorrowController {
     @GetMapping("/page")
     public Result page(BorrowPageRequest pageRequest){
         return Result.success(iBorrowService.page(pageRequest));
+    }
+
+    @GetMapping("/lineCharts/{timeRange}")
+    public Result lineCharts(@PathVariable String timeRange) {
+        return Result.success(iBorrowService.getCountByTimeRange(timeRange));
     }
 }

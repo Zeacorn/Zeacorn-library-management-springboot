@@ -18,4 +18,5 @@ public class User {
     private Date createTime;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date updateTime;
+    private Boolean status;
 }

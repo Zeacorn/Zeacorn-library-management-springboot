@@ -8,7 +8,7 @@
         values(#{name}, #{username}, #{age}, #{sex}, #{phone}, #{address})
     </insert>
     <update id="updateById">
-        update user set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, address = #{address},updatetime = #{updateTime} where id = #{id}
+        update user set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, address = #{address}, updatetime = #{updateTime}, status = #{status} where id = #{id}
     </update>
     <delete id="deleteById">
         delete from user where id = #{id}

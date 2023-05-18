@@ -51,7 +51,7 @@ public class TokenUtils {
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             token = request.getHeader("token");
-            if (StrUtil.isNotBlank(token)) {
+            if (StrUtil.isBlank(token)) {
                 token = request.getParameter("token");
             }
             if (StrUtil.isBlank(token)) {

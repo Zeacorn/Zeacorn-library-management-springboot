@@ -45,8 +45,24 @@ public class Borrow {
     private Date createTime;
 
     /**
-     * 更新时间
+     * 归书日期
      */
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date updateTime;
+    private Date returnDate;
+
+    /**
+     * 借书时长
+     */
+    private Integer day;
+
+    /**
+     * 最迟归还日期
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date returnTime;
+
+    /**
+     * 状态
+     */
+    private String status;
 }
